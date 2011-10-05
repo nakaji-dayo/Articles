@@ -1,0 +1,20 @@
+- if(!err)
+	p new article posted
+	a(href="/") article top
+	div
+		h2 preview
+		code
+			!{doc.contents}
+	div
+		h2 contents
+		code
+			#{doc.contents}
+	div
+		h2 code
+		code
+			#{doc.contents}
+- else
+	p.error= err
+	a(href="javascript:history.back();") back
+
+

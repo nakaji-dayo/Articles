@@ -1,0 +1,10 @@
+h2 #{doc.title}
+dl
+	dt reg date
+	dd #{doc.reg_date}
+	dt last update
+	dd #{doc.update_date}
+div
+	a(href="/edit/#{doc.url}") Edit
+div
+	!{doc.contents}

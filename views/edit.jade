@@ -1,0 +1,21 @@
+h2 new article
+form(action="/#{doc.url}", method="POST")
+	table()
+		tr
+			td
+				label Title: 
+			td
+				input(name="title", value="#{doc.title}")
+		tr
+			td
+				label URL Name:
+			td
+				#{doc.url}
+		tr
+			td
+				label Code:
+			td
+				textarea(name="code", rows="20", cols="100", style="width:600px;") #{doc.code}
+
+	input(type="hidden", name="_method", value="put")
+	input(type="submit", value="Update")

@@ -1,0 +1,20 @@
+h2 new article
+form(action="/", method="POST")
+	table()
+		tr
+			td
+				label Title: 
+			td
+				input(name="title")
+		tr
+			td
+				label URL Name:
+			td
+				input(name="url")
+		tr
+			td
+				label Code:
+			td
+				textarea(name="code", rows="20", cols="100", style="width:600px;")
+	
+	input(type="submit", value="New")

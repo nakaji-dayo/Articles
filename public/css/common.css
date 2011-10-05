@@ -1,0 +1,17 @@
+a:link{
+    color:#00aa00;
+}
+
+a:visited{
+    color:#005500;
+}
+
+a{
+
+}
+
+p.error{
+    border:solid 2px #ff0000;
+    background-color: #ffaaaa;
+}
+
