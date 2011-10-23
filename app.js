@@ -13,7 +13,7 @@ app.configure(function(){
 
 
 app.get('/', function(req, res){
-	Article.find({}, function(err, docs){
+	Article.find({}).sort('reg_date','desc').run(function(err, docs){
 		res.render('index.jade',{docs:docs});
 		});
 
@@ -56,3 +56,4 @@ app.put('/:url', function(req, res){
     });
 
 app.listen(54134);
+console.log('listen 54134');

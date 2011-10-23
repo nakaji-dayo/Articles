@@ -1,14 +1,31 @@
 !!!
 html
 	head
-		title article.nakaji
-		link(rel="stylesheet", type="text/css", href="http://yui.yahooapis.com/3.4.0/build/cssbase/cssbase-min.css")
+		title Articles
+		link(rel="stylesheet", type="text/css", href="http://yui.yahooapis.com/3.4.1/build/cssbase/cssbase-min.css")
+		link(rel="stylesheet", type="text/css", href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css")
 		link(rel="stylesheet", type="text/css", href="/css/common.css")
+		link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Stardos+Stencil:400,700")
 	body
-		div.head
-			h1
-				a(href="/") article.nakaji
-		div.content
-			!= body
-		div.foot
-			
+		div
+			div.yui3-g
+				div.yui3-u-1
+					div.head
+						h1
+							a(href="/") Articles
+			div.yui3-g
+				div.yui3-u-3-4
+					div.content
+						!= body
+				div.yui3-u-1-4
+					div.side
+						h2 updates
+						h2 categories
+						h2 profile
+						ul
+							li daishi nakajima
+							li
+								a(href="http://twitter.com/#!/nakaji_dayo", target="_blank") @nakaji_dayo
+			div.yui3-g
+				div.yu3-u-1
+					div.foot

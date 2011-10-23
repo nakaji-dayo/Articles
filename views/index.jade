@@ -1,9 +1,10 @@
 h2 articles
 a(href="/new") post new article
 
-h3 recentry articles
-ul
-	- docs.forEach(function(doc){
-		li
+h3 recently articles
+- docs.forEach(function(doc){
+	div
+		h3
 			a(href="/#{doc.url}") #{doc.title}
-	-});
+		#{doc.contents}
+-});

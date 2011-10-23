@@ -39,7 +39,10 @@ exports.parse = function(str){
     return r;
 };
 
-var tags = ['p','div','span','h2','h3','h4','h5','h6'];
+var tags = ['h2','h3','h4','h5','h6',
+	    'p','b','small',
+	    'div','span',
+	    'table','tr','th','td'];
 var stack=[];
 
 function inArray(v,arr){

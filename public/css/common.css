@@ -1,13 +1,43 @@
-a:link{
-    color:#00aa00;
+body {
+    margin: auto;
+    width: 940px;
+    background-color: rgb(25,0,0);
+    color:rgb(255,255,255);
+    font-family: cursive;
 }
 
-a:visited{
-    color:#005500;
+div.head h1 a{
+    font-family: 'Stardos Stencil', cursive;
+    font-size: 48px;
+    color:rgb(230,150,0);
+}
+
+div.content{
+    background-color: rgb(255,255,255);
+    color:rgb(0,0,0);
+    padding:10px;
+}
+
+div.side{
+    background-color: rgb(220,200,150);
+    padding:10px;
+    color:rgb(255,100,0);
 }
 
 a{
+    text-decoration: none;
+}
 
+a:link{
+    color:rgb(0,0,220);
+}
+
+a:visited{
+    color:rgb(0,0,150);
+}
+
+a:hover{
+    text-decoration:underline;
 }
 
 p.error{
