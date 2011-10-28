@@ -2,7 +2,6 @@ var express = require('express'),
     app = express.createServer();
 var Article = require('./models/article.js');
 
-
 app.configure(function(){
 	var oneYear = 31557600000;
 	app.use(express.static(__dirname + '/public',{maxAge: oneYear}));
