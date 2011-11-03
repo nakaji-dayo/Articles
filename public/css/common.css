@@ -45,3 +45,13 @@ p.error{
     background-color: #ffaaaa;
 }
 
+/* index */
+div.article{
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+
+}
+h4{
+/*    background-color:gray;*/
+    border-bottom:dashed 1px;
+}

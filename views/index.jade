@@ -3,8 +3,10 @@ a(href="/new") post new article
 
 h3 recently articles
 - docs.forEach(function(doc){
-	div
-		h3
+	div.article
+		h4
 			a(href="/#{doc.url}") #{doc.title}
-		#{doc.contents}
+		!{doc.contents}
 -});
+
+//概要もスタイルで調整するべき

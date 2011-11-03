@@ -15,7 +15,6 @@ app.get('/', function(req, res){
 	Article.find({}).sort('reg_date','desc').run(function(err, docs){
 		res.render('index.jade',{docs:docs});
 		});
-
     });
 
 app.get('/new', function(req, res){

@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var parser = require('../modules/parser.js');
 mongoose.connect('mongodb://localhost/article');
 
-
 var Article = new mongoose.Schema({
 	title : {type:String, required:true},
 	url : {type:String, unique:true, required:true},
@@ -10,6 +9,7 @@ var Article = new mongoose.Schema({
 	code : String,
 	reg_date : {type:Date, default: Date.now},
 	update_date : Date
+
     });
 
 Article.pre('save', function(next){
