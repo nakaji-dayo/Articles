@@ -19,13 +19,18 @@ html
 						!= body
 				div.yui3-u-1-4
 					div.side
-						h2 updates
-						h2 categories
 						h2 profile
 						ul
 							li daishi nakajima
 							li
 								a(href="http://twitter.com/#!/nakaji_dayo", target="_blank") @nakaji_dayo
+						h2 updates
+						- updates.forEach(function(update){
+							div.updates
+								a(href="/#{update.url}") #{update.title}
+						-});
+
+						h2 categories
 			div.yui3-g
 				div.yu3-u-1
 					div.foot

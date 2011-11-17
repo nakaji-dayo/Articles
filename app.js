@@ -8,10 +8,19 @@ app.configure(function(){
 	app.use(express.errorHandler());
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+	//app.use(side());
     });
 
+function layout(req, res, next){
+    Article.find({},['title','url']).sort('update_date','desc').run(function(err, docs){
+	    app.set('view options', {
+		    updates: docs
+			});
+	    next();
+	});
+}
 
-app.get('/', function(req, res){
+app.get('/', layout, function(req, res){
 	Article.find({}).sort('reg_date','desc').run(function(err, docs){
 		res.render('index.jade',{docs:docs});
 		});

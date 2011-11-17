@@ -6,7 +6,6 @@ h3 recently articles
 	div.article
 		h4
 			a(href="/#{doc.url}") #{doc.title}
-		!{doc.contents}
+		!{doc.contents.substring(0,500)+'>>>'}
 -});
 
-//概要もスタイルで調整するべき
