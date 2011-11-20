@@ -15,7 +15,6 @@ app.configure(function(){
 function layout(req, res, next){
     Article.find({},['title','url']).sort('update_date','desc').run(function(err, docs){
 	    Tag.find(function(tag_err, tags){
-		    console.log(tag_err);
 		    app.set('view options', {
 			    updates: docs,
 				tags: tags
@@ -57,7 +56,6 @@ app.get('/:url', layout, function(req,res){
 		    res.end('article not found');
 		}else{
 		    res.render('view.jade',{doc:doc});
-		    console.log();
 		}
 	    });
     });
