@@ -6,6 +6,11 @@ html
 		link(rel="stylesheet", type="text/css", href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css")
 		link(rel="stylesheet", type="text/css", href="/css/common.css")
 		link(rel="stylesheet", type="text/css", href="http://fonts.googleapis.com/css?family=Stardos+Stencil:400,700")
+		script(type="text/javascript",src="/js/syntaxhighlighter/shCore.js")
+		script(type="text/javascript",src="/js/syntaxhighlighter/shBrushJScript.js")
+		link(type="text/css",rel="stylesheet",href="/css/syntaxhighlighter/shCore.css")
+		link(type="text/css",rel="stylesheet",href="/css/syntaxhighlighter/shThemeDefault.css")
+		script(type="text/javascript") SyntaxHighlighter.config.clipboardSwf = '/js/syntaxhighlighter/clipboard.swf'; SyntaxHighlighter.all();
 	body
 		div
 			div.yui3-g
@@ -25,12 +30,17 @@ html
 							li
 								a(href="http://twitter.com/#!/nakaji_dayo", target="_blank") @nakaji_dayo
 						h2 updates
-						- updates.forEach(function(update){
-							div.updates
-								a(href="/#{update.url}") #{update.title}
-						-});
-
-						h2 categories
+						ul
+							- updates.forEach(function(update){
+								li 
+									a(href="/#{update.url}") #{update.title}
+							-});
+						h2 tags
+						ul
+							- tags.forEach(function(tag){
+								li
+									a(href="/search?tag=#{tag._id}") #{tag._id}(#{tag.value})
+							- });
 			div.yui3-g
 				div.yu3-u-1
 					div.foot

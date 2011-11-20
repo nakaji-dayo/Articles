@@ -4,6 +4,12 @@ dl
 	dd #{doc.reg_date}
 	dt last update
 	dd #{doc.update_date}
+	dt tags
+	dd
+	ul
+		- doc.tags.forEach(function(tag){
+			li #{tag}
+		- });
 div
 	a(href="/edit/#{doc.url}") Edit
 div

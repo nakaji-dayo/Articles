@@ -2,20 +2,25 @@ h2 new article
 form(action="/#{doc.url}", method="POST")
 	table()
 		tr
-			td
+			th
 				label Title: 
 			td
 				input(name="title", value="#{doc.title}")
 		tr
-			td
+			th
 				label URL Name:
 			td
 				#{doc.url}
 		tr
+			th
+				label tags
 			td
+				input(name="tags", value="#{doc.tags}")
+		tr
+			th
 				label Code:
 			td
-				textarea(name="code", rows="20", cols="100", style="width:600px;") #{doc.code}
+				textarea(name="code", rows="20", cols="100", style="width:580px;") #{doc.code}
 
 	input(type="hidden", name="_method", value="put")
 	input(type="submit", value="Update")

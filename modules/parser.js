@@ -11,25 +11,30 @@ exports.parse = function(str){
     var lines = str.split('\n');
     var r='';
     for(var i=0;i<lines.length;i++){
-	var words = lines[i].split(' ');
-	for(var j=0;j<words.length;j++){
-	    var word = words[j];
-	    word = word.replace(/\n/g,'').replace(/\r/g,'');
-	    if(word=='')
-		continue;
-	    if(inArray(word,tags)){
-		while(stack[0] && stack[0].indent >= j){
-		    var end = stack.shift();
-		    r += '</'+end.tag+'>';
-		}
-		r += '<'+word+'>';
-		stack.unshift({indent:j,tag:word});
-		words[j] = '';
-		continue;
+	var line = lines[i];
+	line = line.replace(/\n/g,'').replace(/\r/g,'');
+	if(line=='')
+	    continue;
+	if(inArray(line.replace(/\(.*\)/,'').replace(/^ */,''),tags)){
+	    var result = line.match(/(.*)\((.*)\)/,'');
+	    indent = line.match(/(^ *)/,'');
+	    if(indent)
+		indent = indent[1].length;
+	    else
+		indent = 0;
+	    if(!result){
+		result=[];
+		result[1] = line;
 	    }
-	    break;
+	    result[1] = result[1].replace(/^ */,'');
+	    while(stack[0] && stack[0].indent >= indent){
+		var end = stack.shift();
+		r += '</'+end.tag+'>';
+	    }
+	    r += '<' + result[1] + (result[2] ? ' '+result[2]:'') + '>';
+	    stack.unshift({indent:indent,tag:result[1]});
+	    lines[i] = '';
 	}
-	lines[i] = words.join(' ');
 	r += lines[i];
     }
     while(stack[0]){
@@ -42,7 +47,8 @@ exports.parse = function(str){
 var tags = ['h2','h3','h4','h5','h6',
 	    'p','b','small',
 	    'div','span',
-	    'table','tr','th','td'];
+	    'table','tr','th','td',
+	    'code','pre'];
 var stack=[];
 
 function inArray(v,arr){

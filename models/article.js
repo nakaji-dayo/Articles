@@ -7,13 +7,14 @@ var Article = new mongoose.Schema({
 	url : {type:String, unique:true, required:true},
 	contents : String,
 	code : String,
+	tags : [String],
+
 	reg_date : {type:Date, default: Date.now},
 	update_date : Date
-
     });
 
 Article.pre('save', function(next){
-	this.contents = parser.escape(this.code);
+	this.code = parser.escape(this.code);
 	this.contents = parser.parse(this.code);
 	this.update_date = Date.now();
 	next();
