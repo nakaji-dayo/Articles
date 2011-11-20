@@ -2,6 +2,7 @@ var express = require('express'),
     app = express.createServer();
 var Article = require('./models/article.js');
 var Tag = require('./models/tag.js');
+var Auth = require('./modules/auth.js');
 
 app.configure(function(){
 	var oneYear = 31557600000;
@@ -9,6 +10,10 @@ app.configure(function(){
 	app.use(express.errorHandler());
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
+	//	app.use(express.bodyDecoder());
+	//	app.use(express.cookieDecoder());
+	app.use(express.cookieParser());
+	app.use(express.session({secret:"tydfgyjdtrhaa45#Yethzxhyd&ETHN"}));
 	//app.use(side());
     });
 
@@ -17,7 +22,8 @@ function layout(req, res, next){
 	    Tag.find(function(tag_err, tags){
 		    app.set('view options', {
 			    updates: docs,
-				tags: tags
+				tags: tags,
+				user: req.session.user
 				});
 		    next();
 		});
@@ -49,13 +55,14 @@ app.get('/search', layout, function(req, res){
     }
     });
 
+app.get('/login/twitter', Auth.get);
 
 app.get('/:url', layout, function(req,res){
 	Article.findOne({url:req.params.url}, function(err, doc){
 		if(err || !doc){
 		    res.end('article not found');
 		}else{
-		    res.render('view.jade',{doc:doc});
+		    res.render('view.jade',{doc:doc,url:req.params.url});
 		}
 	    });
     });

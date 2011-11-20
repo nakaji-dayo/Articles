@@ -45,7 +45,7 @@ exports.parse = function(str){
     return r;
 };
 
-var tags = ['h2','h3','h4','h5','h6',
+var tags = ['h3','h4','h5','h6',
 	    'p','b','small',
 	    'div','span',
 	    'table','tr','th','td',

@@ -41,6 +41,12 @@ html
 								li
 									a(href="/search?tag=#{tag._id}") #{tag._id}(#{tag.value})
 							- });
+						h2 login
+						- if(user){
+							p hello #{user}
+						- }else{
+							a(href="/login/twitter") login with twitter
+						- }
 			div.yui3-g
 				div.yu3-u-1
 					div.foot
