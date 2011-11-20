@@ -27,9 +27,6 @@ function layout(req, res, next){
 
 app.get('/', layout, function(req, res){
 	Article.find({}).sort('reg_date','desc').run(function(err, docs){
-		docs.forEach(function(doc){
-			doc.
-		    });
 		res.render('index.jade',{docs:docs});
 		});
     });
@@ -89,5 +86,10 @@ app.put('/:url', layout, function(req, res){
 	    });
     });
 
-app.listen(54134);
-console.log('listen 54134');
+if(process.env.NODE_ENV === 'production'){
+    app.listen(8001);
+    console.log('listen 8001');
+}else{
+    app.listen(54134);
+    console.log('listen 54134');
+}
