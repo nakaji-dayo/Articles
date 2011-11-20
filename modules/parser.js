@@ -18,10 +18,11 @@ exports.parse = function(str){
 	if(inArray(line.replace(/\(.*\)/,'').replace(/^ */,''),tags)){
 	    var result = line.match(/(.*)\((.*)\)/,'');
 	    indent = line.match(/(^ *)/,'');
-	    if(indent)
+	    if(indent){
 		indent = indent[1].length;
-	    else
+	    }else{
 		indent = 0;
+	    }
 	    if(!result){
 		result=[];
 		result[1] = line;

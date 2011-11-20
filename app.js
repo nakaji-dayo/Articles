@@ -27,6 +27,9 @@ function layout(req, res, next){
 
 app.get('/', layout, function(req, res){
 	Article.find({}).sort('reg_date','desc').run(function(err, docs){
+		docs.forEach(function(doc){
+			doc.
+		    });
 		res.render('index.jade',{docs:docs});
 		});
     });
