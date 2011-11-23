@@ -13,12 +13,13 @@ app.configure(function(){
 	//	app.use(express.bodyDecoder());
 	//	app.use(express.cookieDecoder());
 	app.use(express.cookieParser());
-	app.use(express.session({secret:"^ydfHEyGHtrhaB%#a45#YethH4xhyd&ET&&HN"}));
+	app.use(express.session({secret:'^ydfHEyGHtrhaB%#a45#YethH4xhyd&ET&&HN',
+			cookie:{maxAge:60*1000} }));
 	//app.use(side());
     });
 
 function layout(req, res, next){
-    Article.find({},['title','url']).sort('update_date','desc').run(function(err, docs){
+    Article.find({},['title','url']).sort('update_date','desc').limit(18).run(function(err, docs){
 	    Tag.find(function(tag_err, tags){
 		    app.set('view options', {
 			    updates: docs,
@@ -31,15 +32,15 @@ function layout(req, res, next){
 }
 
 app.get('/', layout, function(req, res){
-	Article.find({}).sort('reg_date','desc').run(function(err, docs){
+	Article.find({}).sort('reg_date','desc').limit(10).run(function(err, docs){
 		res.render('index.jade',{docs:docs});
 		});
     });
 
-app.get('/new', layout,  function(req, res){
+app.get('/new', Auth.auth('root'), layout,  function(req, res){
 	res.render('new.jade');
     });
-app.get('/edit/:url', layout, function(req, res){
+app.get('/edit/:url', Auth.auth('root'), layout, function(req, res){
 	Article.findOne({url:req.params.url},function(err, doc){
 		res.render('edit.jade',{doc:doc});
 	    });
@@ -67,7 +68,7 @@ app.get('/:url', layout, function(req,res){
 	    });
     });
 
-app.post('/', layout, function(req, res){
+app.post('/', Auth.auth('root'), layout, function(req, res){
 	var article = new Article();
 	article.title = req.body.title;
 	article.url = req.body.url;
@@ -79,7 +80,7 @@ app.post('/', layout, function(req, res){
 	    });
     });
 
-app.put('/:url', layout, function(req, res){
+app.put('/:url', Auth.auth('root'), layout, function(req, res){
 	Article.findOne({url:req.params.url},function(err, doc){
 		doc.title = req.body.title;
 		doc.code = req.body.code;

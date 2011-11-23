@@ -3,7 +3,8 @@ body {
     width: 940px;
     background-color: rgb(25,0,0);
     color:rgb(255,255,255);
-    font-family: cursive;
+    font-family: monospace;
+/*    font-size:13px;*/
 }
 
 div.head h1 a{
@@ -22,6 +23,12 @@ div.side{
     background-color: rgb(220,200,150);
     padding:10px;
     color:rgb(255,100,0);
+}
+
+div.foot{
+    background-color:rgb(30,0,0);
+    color:rgb(150,100,50);
+    text-align:center;
 }
 
 a{

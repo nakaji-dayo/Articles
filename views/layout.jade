@@ -50,12 +50,20 @@ html
 								li
 									a(href="/search?tag=#{tag._id}") #{tag._id}(#{tag.value})
 							- });
-						h2 login
-						- if(user){
+						h2 admin
+						-if(user){
 							p hello #{user}
-						- }else{
+							ul
+								li 
+									a(href="/new") post new article
+								-if(typeof(doc)!="undefined"){
+									li
+										a(href="/edit/#{doc.url}") edit /#{doc.url}
+								-}
+						-}else{
 							a(href="/login/twitter") login with twitter
-						- }
+						-}
 			div.yui3-g
-				div.yu3-u-1
+				div.yui3-u-1
 					div.foot
+						small ©2011 Daishi Nakajima

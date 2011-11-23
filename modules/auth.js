@@ -39,4 +39,34 @@ exports.get = function(req, res) {
 		}
 	    });
     }
+};
+
+exports.auth = function(groups){
+    if(!(groups instanceof Array)){
+	var group = groups;
+	groups = new Array();
+	groups[0] = group;
+    }
+    return function(req, res, next){
+	if(req.session.user){
+	    for(var i=0;i<users.length;i++){
+		if(users[i].name === req.session.user){
+		    user = users[i];
+		    break;
+		}
+	    }
+	    if(user){
+		for(var i=0;i<groups.length;i++){
+		    if(user.group === groups[i]){
+			return next();
+		    }
+		}
+	    }
+	}
+	res.send('Unauthorized',401)
+    };
 }
+
+var users = [
+	     {name:'nakaji_dayo', group:'root'}
+];
