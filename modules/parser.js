@@ -8,6 +8,9 @@ exports.escape = function(str){
 };
 
 exports.parse = function(str){
+    for(var k in phrases){
+	str = str.replace(new RegExp(k,'g'),phrases[k]);
+    }
     var lines = str.split('\n');
     var r='';
     for(var i=0;i<lines.length;i++){
@@ -50,6 +53,10 @@ var tags = ['h3','h4','h5','h6',
 	    'div','span',
 	    'table','tr','th','td',
 	    'code','pre'];
+var phrases = {
+    '##{code:(.*)}':'pre(class="brush:$1")'
+};
+
 var stack=[];
 
 function inArray(v,arr){

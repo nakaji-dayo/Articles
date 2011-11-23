@@ -13,7 +13,7 @@ app.configure(function(){
 	//	app.use(express.bodyDecoder());
 	//	app.use(express.cookieDecoder());
 	app.use(express.cookieParser());
-	app.use(express.session({secret:"tydfgyjdtrhaa45#Yethzxhyd&ETHN"}));
+	app.use(express.session({secret:"^ydfHEyGHtrhaB%#a45#YethH4xhyd&ET&&HN"}));
 	//app.use(side());
     });
 

@@ -16,16 +16,17 @@ div
 	!{doc.contents}
 
 h3(style="margin-top:100px;") Comments
-a(href="https://twitter.com/share",class="twitter-share-button",data-count="horizontal, data-via="nakaji_dayo",data-lang="ja") ツイート
-script(type="text/javascript",src="//platform.twitter.com/widgets.js")
-div(id="fb-root")
-script
-	(function(d, s, id) {
-	var js, fjs = d.getElementsByTagName(s)[0];
-	if (d.getElementById(id)) {return;}
-	js = d.createElement(s); js.id = id;
-	js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
-	fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-div(class="fb-like",data-href="articles.nakaji.me/#{url}",data-send="true",data-width="450",data-show-faces="true",data-font="arial")
-div(class="fb-comments",data-href="articles.nakaji.me/#{url}",data-num-posts="4",data-width="500")
+div.comment
+	a(href="https://twitter.com/share",class="twitter-share-button",data-count="horizontal, data-via="nakaji_dayo",data-lang="ja") ツイート
+	script(type="text/javascript",src="//platform.twitter.com/widgets.js")
+	div(id="fb-root")
+	script
+		(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	div(class="fb-like",data-href="articles.nakaji.me/#{url}",data-send="true",data-width="450",data-show-faces="true",data-font="arial")
+	div(class="fb-comments",data-href="articles.nakaji.me/#{url}",data-num-posts="4",data-width="500")
