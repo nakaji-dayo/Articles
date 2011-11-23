@@ -5,7 +5,7 @@ h3 recently articles
 	div.article
 		h4
 			a(href="/#{doc.url}") #{doc.title}
-		dl
+		dl.info
 			dt reg date
 			dd #{doc.reg_date}
 			dt last update
@@ -16,6 +16,6 @@ h3 recently articles
 					- doc.tags.forEach(function(tag){
 						li #{tag}
 					- });
-		!{doc.contents.replace(/<.*>/g,'').substring(0,500)+'...'}
+		div.contents
+			!{doc.contents.replace(/<.*>/g,'').substring(0,500)+'...'}
 -});
-

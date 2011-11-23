@@ -1,21 +1,23 @@
 h2 #{doc.title}
-dl
-	dt reg date
-	dd #{doc.reg_date}
-	dt last update
-	dd #{doc.update_date}
-	dt tags
-	dd
-	ul
-		- doc.tags.forEach(function(tag){
-			li #{tag}
-		- });
 div
+	dl.info
+		dt reg date
+		dd #{doc.reg_date}
+		dt last update
+		dd #{doc.update_date}
+		dt tags
+		dd
+			ul
+				- doc.tags.forEach(function(tag){
+					li 
+						a(href="/search?tag=#{tag}") #{tag}
+				- });
+div.contents
 	!{doc.contents}
 
 h3(style="margin-top:100px;") Comments
 div.comment
-	a(href="https://twitter.com/share",class="twitter-share-button",data-count="horizontal, data-via="nakaji_dayo",data-lang="ja") ツイート
+	a(href="https://twitter.com/share",class="twitter-share-button",data-count="horizontal", data-via="nakaji_dayo",data-lang="ja") ツイート
 	script(type="text/javascript",src="//platform.twitter.com/widgets.js")
 	div(id="fb-root")
 	script
@@ -28,3 +30,14 @@ div.comment
 		}(document, 'script', 'facebook-jssdk'));
 	div(class="fb-like",data-href="articles.nakaji.me/#{url}",data-send="true",data-width="450",data-show-faces="true",data-font="arial")
 	div(class="fb-comments",data-href="articles.nakaji.me/#{url}",data-num-posts="4",data-width="500")
+
+h3 Trackback
+label(for="trackback_url") url : 
+span(id="trackback_url") #{trackback}
+-doc.trackbacks.forEach(function(t){
+	h4
+		a(href="#{t.url}") #{t.title}(#{t.blog_name})
+	p(style="word-break: break-all;") #{t.excerpt}
+-})
+
+

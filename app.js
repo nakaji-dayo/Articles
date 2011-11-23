@@ -22,7 +22,8 @@ function layout(req, res, next){
     Article.find({},['title','url']).sort('update_date','desc').limit(18).run(function(err, docs){
 	    Tag.find(function(tag_err, tags){
 		    app.set('view options', {
-			    updates: docs,
+			    title:'Articles',
+				updates: docs,
 				tags: tags,
 				user: req.session.user
 				});
@@ -63,7 +64,9 @@ app.get('/:url', layout, function(req,res){
 		if(err || !doc){
 		    res.end('article not found');
 		}else{
-		    res.render('view.jade',{doc:doc,url:req.params.url});
+		    res.render('view.jade',{doc:doc,url:req.params.url,
+				title:doc.title+' - Articles',
+				trackback:'http://articles.nakaji.me/trackback/'+req.params.url});
 		}
 	    });
     });
@@ -90,6 +93,31 @@ app.put('/:url', Auth.auth('root'), layout, function(req, res){
 			res.render('posted.jade',{doc:doc, err:err});
 		    });
 	    });
+    });
+
+app.post('/trackback/:url',function(req,res){
+	console.log('posted trackback');
+	var t = {};
+	t.title = req.body.title;
+	t.excerpt = req.body.excerpt;
+	t.url = req.body.url;
+	t.blog_name = req.body.blog_name;
+	if(!(t.title && t.url && t.blog_name)){
+	    res.render('trackback/error.jade',{layout:null, message:'title,url,blog_name is required'});
+	    return;
+	}
+	t.title = t.title.substring(0, 30);
+	t.excerpt = t.excerpt ? t.excerpt.substring(0, 200):'';
+	t.url = t.url.substring(0, 100);
+	t.blog_name = t.blog_name.substring(0, 30);
+	Article.update({url:req.params.url},{$push:{trackbacks:t}},
+		       {upsert:false,multi:false},function(err){
+			   if(err){
+			       res.render('trackback/error.jade',{layout:null, message:'server error'});
+			       return;
+			   }
+			   res.render('trackback/success.jade',{layout:null});
+		       });
     });
 
 if(process.env.NODE_ENV === 'production'){

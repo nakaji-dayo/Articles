@@ -4,7 +4,6 @@ body {
     background-color: rgb(25,0,0);
     color:rgb(255,255,255);
     font-family: monospace;
-/*    font-size:13px;*/
 }
 
 div.head h1 a{
@@ -50,6 +49,33 @@ a:hover{
 p.error{
     border:solid 2px #ff0000;
     background-color: #ffaaaa;
+}
+dl.info{
+    margin-bottom:30px;
+}
+dl.info dt{
+  float: left;
+  clear: left;
+}
+dl.info dd {
+  margin-left: 7em;
+}
+dl.info dd ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl.info dd ul li{
+  float: left;
+  margin: 0;
+  padding: 0;
+  margin-right:1em;
+}
+
+
+div.contents{
+    clear:both;
 }
 
 /* index */
