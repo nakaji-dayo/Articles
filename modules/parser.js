@@ -52,7 +52,8 @@ var tags = ['h3','h4','h5','h6',
 	    'p','b','small',
 	    'div','span',
 	    'table','tr','th','td',
-	    'code','pre'];
+	    'code','pre',
+	    'a','ul','ol','li'];
 var phrases = {
     '##{code:(.*)}':'pre(class="brush:$1")'
 };
