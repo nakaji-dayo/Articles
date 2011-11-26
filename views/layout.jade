@@ -35,10 +35,34 @@ html
 				div.yui3-u-1-4
 					div.side
 						h2 profile
-						ul
-							li daishi nakajima
-							li
-								a(href="http://twitter.com/#!/nakaji_dayo", target="_blank") @nakaji_dayo
+						p hello.
+						script(src="http://widgets.twimg.com/j/2/widget.js")
+						script
+							new TWTR.Widget({
+							version: 2,
+							type: 'profile',
+							rpp: 2,
+							interval: 30000,
+							width: 200,
+							height: 300,
+							theme: {
+							shell: {
+							background: 'rgb(220,200,150)',
+							color: '#ff6600'
+							},
+							tweets: {
+							background: '#rgb(220,200,150)',
+							color: '#ff6600',
+							links: '#0000dc'
+							}
+							},
+							features: {
+							scrollbar: false,
+							loop: false,
+							live: false,
+							behavior: 'all'
+							}
+							}).render().setUser('nakaji_dayo').start();
 						h2 updates
 						ul
 							- updates.forEach(function(update){
