@@ -14,7 +14,7 @@ app.configure(function(){
 	//	app.use(express.cookieDecoder());
 	app.use(express.cookieParser());
 	app.use(express.session({secret:'^ydfHEyGHtrhaB%#a45#YethH4xhyd&ET&&HN',
-			cookie:{maxAge:60*1000} }));
+			cookie:{maxAge:60*60*1000} }));
 	//app.use(side());
     });
 
