@@ -54,6 +54,7 @@ exports.auth = function(groups){
     }
     return function(req, res, next){
 	if(req.session.user){
+	    var user = null;
 	    for(var i=0;i<users.length;i++){
 		if(users[i].name === req.session.user){
 		    user = users[i];
