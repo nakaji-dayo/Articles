@@ -1,8 +1,9 @@
 var express = require('express'),
     app = express.createServer();
+var config = require('config');
 var Article = require('./models/article.js');
 var Tag = require('./models/tag.js');
-var Auth = require('./modules/auth.js');
+var Auth = require('./modules/auth.js').init(config.oauth.key,config.oauth.secret);
 
 app.configure(function(){
 	var oneYear = 31557600000;

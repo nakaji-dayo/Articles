@@ -1,14 +1,19 @@
-var oauth = new (require('oauth').OAuth)(
-					 'https://api.twitter.com/oauth/request_token',
-					 'https://api.twitter.com/oauth/access_token',
-					 'ccS7TKr24KagpezVoKhWYA', // consumer key
-					 'jSw4as7zeGLWZgFwO8M1RMTt23b5Z1JtmTdJyrSZIg', // consumer secret
-					 '1.0',
-					 process.env.NODE_ENV === 'production'?
-					 'http://articles.nakaji.me/login/twitter':
-					 'http://127.0.0.1:54134/login/twitter', // callback URL
-					 'HMAC-SHA1'
-					 );
+var oauth;
+exports.init = function(key,secret){
+    oauth = new (require('oauth').OAuth)(
+					     'https://api.twitter.com/oauth/request_token',
+					     'https://api.twitter.com/oauth/access_token',
+					     key,
+					     secret,
+					     '1.0',
+					     process.env.NODE_ENV === 'production'?
+					     'http://articles.nakaji.me/login/twitter':
+					     'http://127.0.0.1:54134/login/twitter',
+					     'HMAC-SHA1'
+					     );
+    return this;
+}
+
 
 exports.get = function(req, res) {
     var oauth_token    = req.query.oauth_token;
