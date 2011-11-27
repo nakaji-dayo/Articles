@@ -78,8 +78,9 @@ div.contents{
     clear:both;
 }
 
-h4{
-font-size:90%;
+div.contents h3{
+border-left:solid 5px rgb(220,200,150);
+padding-left:5px;
 }
 
 /* index */
