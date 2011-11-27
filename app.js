@@ -20,7 +20,7 @@ app.configure(function(){
     });
 
 function layout(req, res, next){
-    Article.find({},['title','url']).sort('update_date','desc').limit(18).run(function(err, docs){
+    Article.find({draft:{$ne:true}},['title','url']).sort('update_date','desc').limit(18).run(function(err, docs){
 	    Tag.find(function(tag_err, tags){
 		    app.set('view options', {
 			    title:'Articles',
@@ -34,7 +34,7 @@ function layout(req, res, next){
 }
 
 app.get('/', layout, function(req, res){
-	Article.find({}).sort('reg_date','desc').limit(10).run(function(err, docs){
+	Article.find({draft:{$ne:true}}).sort('reg_date','desc').limit(10).run(function(err, docs){
 		res.render('index.jade',{docs:docs});
 		});
     });
@@ -78,6 +78,7 @@ app.post('/', Auth.auth('root'), layout, function(req, res){
 	article.url = req.body.url;
 	article.code = req.body.code;
 	article.tags = req.body.tags.split(',');
+	article.draft = !!req.body.draft;
 	article.save(function(err){
 		Tag.countingTags();
 		res.render('posted.jade',{doc:article, err:err});
@@ -89,6 +90,7 @@ app.put('/:url', Auth.auth('root'), layout, function(req, res){
 		doc.title = req.body.title;
 		doc.code = req.body.code;
 		doc.tags = req.body.tags.split(',');
+		doc.draft = !!req.body.draft;
 		doc.save(function(err){
 			Tag.countingTags();
 			res.render('posted.jade',{doc:doc, err:err});

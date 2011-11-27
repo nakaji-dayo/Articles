@@ -18,6 +18,11 @@ form(action="/", method="POST")
 				input(name="tags")
 		tr
 			th
+				label is draft
+			td
+				input(name="draft",type="checkbox")
+		tr
+			th
 				label Code:
 			td
 				textarea(name="code", rows="20", cols="100", style="width:600px;")
