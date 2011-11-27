@@ -84,7 +84,8 @@ div.article{
     border-bottom: solid 2px;
 
 }
-h4{
+
+div.article h4{
 /*    background-color:gray;*/
     border-bottom:dashed 1px;
 }
