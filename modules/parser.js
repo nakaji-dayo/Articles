@@ -39,6 +39,19 @@ exports.parse = function(str){
 	    stack.unshift({indent:indent,tag:result[1]});
 	    lines[i] = '';
 	}
+	if(line.replace(/\(.*\)/,'').replace(/^ */,'') == '##'){
+	    indent = line.match(/(^ *)/,'');
+	    if(indent){
+		indent = indent[1].length;
+	    }else{
+		indent = 0;
+	    }
+	    while(stack[0] && stack[0].indent >= indent){
+		var end = stack.shift();
+		r += '</'+end.tag+'>';
+		lines[i] = '';
+	    }
+	}
 	r += lines[i];
     }
     while(stack[0]){
