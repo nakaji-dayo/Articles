@@ -78,6 +78,10 @@ div.contents{
     clear:both;
 }
 
+h4{
+font-size:90%;
+}
+
 /* index */
 div.article{
     border-top: solid 2px;
