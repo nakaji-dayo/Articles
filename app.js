@@ -14,7 +14,9 @@ app.configure(function(){
 	app.use(express.methodOverride());
 
 	app.use(express.cookieParser());
+	var mongoStore = require('connect-mongodb');
 	app.use(express.session({secret:config.session.secret,
+			store: new mongoStore({url:config.db.connection}),
 			cookie:{maxAge:config.session.age} }));
     });
 

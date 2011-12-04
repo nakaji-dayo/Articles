@@ -17,7 +17,8 @@
     "express" : "~2.5.1",
     "jade" : "~0.19.0",
     "mongoose" : "~2.4.1",
-    "oauth" : "~0.9.5"
+    "oauth" : "~0.9.5",
+    "connect-mongodb":"~1.1.1"
   },
   "devDependencies": {}
 }
