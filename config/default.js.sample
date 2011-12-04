@@ -1,9 +1,36 @@
 module.exports = {
     session:{
-	secret:"****************************************"
+	secret:"****************************************************",
+	age:60*60*1000
     },
     oauth:{
-	key:"*********************",
-	secret:"*********************************************"
-    }
+	key:"************************(twitter oauth key)",
+	secret:"*************************************************"
+    },
+    blog:{
+	title:"Articles",
+	base_url:"http://example.com",
+	show_updates:18,
+	show_index:10,
+	foot:"",
+	tags:['h3','h4','h5','h6',
+	      'p','b','small',
+	      'div','span',
+	      'table','tr','th','td',
+	      'ul','ol','li',
+	      'dl','dt','dd',
+	      'code','pre','q',
+	      'a','img','br'],
+	phrases:{
+	    '##{code:(.*)}':'pre(class="brush:$1")'
+	},
+	users:[{name:'********(twitter account name)', group:'root'}]
+    },
+    sns:{
+	twitter:"********(account name)"
+    },
+    db:{
+	connection:"mongodb://localhost/article"
+    },
+    port:80
 };
