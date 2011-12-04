@@ -18,7 +18,7 @@ var Article = new mongoose.Schema({
 	code : String,
 	tags : [String],
 	trackbacks : [Trackback],
-	draft : [Boolean],
+	draft : Boolean,
 
 	reg_date : {type:Date, default: Date.now},
 	update_date : Date
