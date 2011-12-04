@@ -1,0 +1,23 @@
+{
+  "author": "Daishi Nakajima (http://nakaji.me/)",
+  "name": "articles",
+  "description": "Articles is blog system. developed with node.js. database is used mongodb",
+  "version": "0.3.0",
+  "homepage": "https://github.com/nakaji-dayo/Articles",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nakaji-dayo/Articles.git"
+  },
+  "engines": {
+    "node": ">=v0.4.10"
+  },
+  "dependencies": {
+    "config" : "~0.4.6",
+    "ejs" : "~0.5.0",
+    "express" : "~2.5.1",
+    "jade" : "~0.19.0",
+    "mongoose" : "~2.4.1",
+    "oauth" : "~0.9.5"
+  },
+  "devDependencies": {}
+}
