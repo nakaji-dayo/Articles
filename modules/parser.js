@@ -1,3 +1,6 @@
+var config = require('config');
+var tags = config.blog.tags;
+var phrases = config.blog.phrases;
 
 exports.escape = function(str){
     str = str.replace(/&/g,'&amp;');
@@ -59,18 +62,6 @@ exports.parse = function(str){
 	r += '</'+end.tag+'>';
     }
     return r;
-};
-
-var tags = ['h3','h4','h5','h6',
-	    'p','b','small',
-	    'div','span',
-	    'table','tr','th','td',
-	    'ul','ol','li',
-	    'dl','dt','dd',
-	    'code','pre','q',
-	    'a','img','br'];
-var phrases = {
-    '##{code:(.*)}':'pre(class="brush:$1")'
 };
 
 var stack=[];

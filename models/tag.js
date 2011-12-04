@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/article');
+var config = require('config');
+
+mongoose.connect(config.db.connection);
 
 var Tag = new mongoose.Schema({
 	_id : {type:String, required:true},

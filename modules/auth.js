@@ -1,16 +1,16 @@
 var oauth;
-exports.init = function(key,secret){
+var users = [];
+exports.init = function(key,secret,url,user_settings){
     oauth = new (require('oauth').OAuth)(
 					     'https://api.twitter.com/oauth/request_token',
 					     'https://api.twitter.com/oauth/access_token',
 					     key,
 					     secret,
 					     '1.0',
-					     process.env.NODE_ENV === 'production'?
-					     'http://articles.nakaji.me/login/twitter':
-					     'http://127.0.0.1:54134/login/twitter',
+					     url,
 					     'HMAC-SHA1'
 					     );
+    users = user_settings;
     return this;
 }
 
@@ -72,7 +72,3 @@ exports.auth = function(groups){
 	res.send('Unauthorized',401)
     };
 }
-
-var users = [
-	     {name:'nakaji_dayo', group:'root'}
-];

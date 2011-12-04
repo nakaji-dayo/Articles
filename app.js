@@ -3,7 +3,8 @@ var express = require('express'),
 var config = require('config');
 var Article = require('./models/article.js');
 var Tag = require('./models/tag.js');
-var Auth = require('./modules/auth.js').init(config.oauth.key,config.oauth.secret);
+var Auth = require('./modules/auth.js').
+    init(config.oauth.key,config.oauth.secret,config.blog.base_url+'/login/twitter',config.blog.users);
 
 app.configure(function(){
 	var oneYear = 31557600000;
@@ -11,31 +12,32 @@ app.configure(function(){
 	app.use(express.errorHandler());
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-	//	app.use(express.bodyDecoder());
-	//	app.use(express.cookieDecoder());
+
 	app.use(express.cookieParser());
 	app.use(express.session({secret:config.session.secret,
-			cookie:{maxAge:60*60*1000} }));
-	//app.use(side());
+			cookie:{maxAge:config.session.age} }));
     });
 
 function layout(req, res, next){
-    Article.find({draft:{$ne:true}},['title','url']).sort('update_date','desc').limit(18).run(function(err, docs){
-	    Tag.find(function(tag_err, tags){
-		    app.set('view options', {
-			    title:'Articles',
-				updates: docs,
-				tags: tags,
-				user: req.session.user
-				});
-		    next();
-		});
-	});
+    Article.find({draft:{$ne:true}},['title','url']).
+	sort('update_date','desc').limit(config.blog.show_updates).run(function(err, docs){
+		Tag.find(function(tag_err, tags){
+			app.set('view options', {
+				config:config,
+				title:config.blog.title,
+				    updates: docs,
+				    tags: tags,
+				    user: req.session.user
+				    });
+			next();
+		    });
+	    });
 }
 
 app.get('/', layout, function(req, res){
-	Article.find({draft:{$ne:true}}).sort('reg_date','desc').limit(10).run(function(err, docs){
-		res.render('index.jade',{docs:docs});
+	Article.find({draft:{$ne:true}}).
+	    sort('reg_date','desc').limit(config.blog.show_index).run(function(err, docs){
+		    res.render('index.jade',{docs:docs});
 		});
     });
 
@@ -48,14 +50,14 @@ app.get('/edit/:url', Auth.auth('root'), layout, function(req, res){
 	    });
     });
 app.get('/search', layout, function(req, res){
-    var tag = req.query.tag;
-    if(tag){
-	Article.find({tags : tag}).sort('reg_date','desc').run(function(err, docs){
-		res.render('index.jade',{docs:docs});
+	var tag = req.query.tag;
+	if(tag){
+	    Article.find({tags : tag}).sort('reg_date','desc').run(function(err, docs){
+		    res.render('index.jade',{docs:docs});
 		});
-    }else{
-	res.redirect('/');
-    }
+	}else{
+	    res.redirect('/');
+	}
     });
 
 app.get('/login/twitter', Auth.get);
@@ -66,8 +68,8 @@ app.get('/:url', layout, function(req,res){
 		    res.end('article not found');
 		}else{
 		    res.render('view.jade',{doc:doc,url:req.params.url,
-				title:doc.title+' - Articles',
-				trackback:'http://articles.nakaji.me/trackback/'+req.params.url});
+				title:doc.title + ' - ' + config.blog.title,
+				trackback:config.blog.base_url+'/trackback/'+req.params.url});
 		}
 	    });
     });
@@ -123,10 +125,5 @@ app.post('/trackback/:url',function(req,res){
 		       });
     });
 
-if(process.env.NODE_ENV === 'production'){
-    app.listen(8001);
-    console.log('listen 8001');
-}else{
-    app.listen(54134);
-    console.log('listen 54134');
-}
+app.listen(config.port);
+console.log('listen '+config.port);

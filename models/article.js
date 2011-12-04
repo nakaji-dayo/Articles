@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var parser = require('../modules/parser.js');
-mongoose.connect('mongodb://localhost/article');
+var config = require('config');
+
+mongoose.connect(config.db.connection);
 
 var Trackback = new mongoose.Schema({
 	title:String,
