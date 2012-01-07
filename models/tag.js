@@ -15,21 +15,21 @@ module.exports = mongoose.model('Tag');
 module.exports.countingTags = function(){
 	cmd = {
 	    "mapreduce" : "articles",
-	    "map" : function() {
+	    "map" : (function() {
 		if (!this.tags) {
 		    return;
 		}
 		for (index in this.tags) {
 		    emit(this.tags[index], 1);
 		}
-	    },
-	    "reduce" : function(previous, current) {
+		}).toString(),
+	    "reduce" : (function(previous, current) {
 		var count = 0;
 		for (index in current) {
 		    count += current[index];
 		}
 		return count;
-	    },
+		}).toString(),
 	    "out" : "tags"};
 	mongoose.connection.db.executeDbCommand(cmd, function(err,dbres){
 		console.log(err);
